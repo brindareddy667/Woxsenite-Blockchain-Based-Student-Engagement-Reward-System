@@ -1,0 +1,9 @@
+flask
+web3
+easyocr
+opencv-python
+pillow
+torch
+torchvision
+numpy
+rapidfuzz
