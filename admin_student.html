@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Admin Student View</title>
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+<div class="sidebar">
+<h2>Admin</h2>
+<a href="/admin">← Back</a>
+</div>
+
+<div class="main">
+
+<h1>{{ student[0] }}</h1>
+
+<div class="card">
+<b>Roll:</b> {{ student[1] }} <br>
+<b>Course:</b> {{ student[2] }} <br>
+<b>Tokens:</b> {{ student[3] }}
+</div>
+
+<h2>Attendance Requests</h2>
+
+{% for a in attendance %}
+
+<div class="card">
+
+{{ a[1] }} <br>
+Tokens: {{ a[2] }}
+
+<br><br>
+
+<a class="button"
+href="/approve_attendance/{{ a[0] }}/{{ user_id }}">
+Approve
+</a>
+
+</div>
+
+{% endfor %}
+
+<h2>Event Requests</h2>
+
+{% for e in events %}
+
+<div class="card">
+
+<b>{{ e[1] }}</b> - {{ e[2] }}
+
+{% if e[3] %}
+<br>Project: {{ e[3] }}
+{% endif %}
+
+{% if e[4] %}
+<br>Documentation:
+<a href="/uploads/{{ e[4] }}">{{ e[4] }}</a>
+{% endif %}
+
+{% if e[5] %}
+<br>Certificate:
+<a href="/uploads/{{ e[5] }}">{{ e[5] }}</a>
+{% endif %}
+
+<br><br>
+
+<b>AI Verification</b>
+
+<br>Confidence: {{ e[7] }}
+
+{% if e[8] %}
+<p style="color:green;">✔ Name Verified</p>
+{% else %}
+<p style="color:red;">⚠ Name mismatch</p>
+{% endif %}
+
+{% if e[9] %}
+<p style="color:red;">⚠ Possible image editing detected</p>
+{% else %}
+<p style="color:green;">✔ Image authentic</p>
+{% endif %}
+
+<br>
+
+Tokens: {{ e[6] }}
+
+<br><br>
+
+<a class="button"
+href="/approve_event/{{ e[0] }}/{{ user_id }}">
+Approve
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+</div>
+
+</body>
+</html>
